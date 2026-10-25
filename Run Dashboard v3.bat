@@ -1,0 +1,15 @@
+@echo off
+title AI Cloud Resource Allocation (easy view, v3)
+cd /d "%~dp0"
+echo.
+echo  ==========================================================
+echo   AI-Driven Cloud Resource Allocation
+echo   Installing requirements (first run only, needs internet)
+echo  ==========================================================
+python -m pip install -q -r requirements.txt
+echo.
+echo  Starting dashboard... your browser will open automatically.
+echo  Keep this window open. Close it to stop the app.
+echo.
+python -m streamlit run app_v3.py --server.port 8503 --server.headless false --browser.gatherUsageStats false
+pause

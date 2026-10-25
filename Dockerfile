@@ -4,7 +4,7 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    APP_FILE=app_v2.py
+    APP_FILE=app_v3.py
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 
 COPY core/ core/
 COPY .streamlit/ .streamlit/
-COPY app.py app_v2.py ./
+COPY app.py app_v2.py app_v3.py ./
 
 # Run as a non-root user
 RUN useradd --create-home appuser && chown -R appuser /app

@@ -62,7 +62,8 @@ Anomaly detection found 26 of 27 injected anomalies across 9 scenario/seed runs,
 ## Project structure
 
 ```
-app_v2.py            Easy-to-read dashboard (plain language, guided tabs)
+app_v3.py            Easy-to-read dashboard: guided pages, Next/Back buttons, dark mode switch
+app_v2.py            Earlier version of the easy dashboard
 app.py               Full technical dashboard (8 tabs)
 Dockerfile           Container image; docker-compose.yml runs it
 k8s/                 Kubernetes manifests (Deployment, Service, HPA)

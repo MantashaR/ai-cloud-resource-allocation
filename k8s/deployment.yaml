@@ -23,7 +23,7 @@ spec:
             - containerPort: 8501
           env:
             - name: APP_FILE
-              value: app_v2.py
+              value: app_v3.py
           resources:
             requests:            # what the scheduler reserves for each pod
               cpu: 250m

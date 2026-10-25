@@ -6,6 +6,6 @@ services:
     ports:
       - "8501:8501"
     environment:
-      # app_v2.py = easy dashboard, app.py = full technical dashboard
-      APP_FILE: app_v2.py
+      # app_v3.py = easy dashboard (dark mode), app_v2.py = earlier easy version, app.py = full technical dashboard
+      APP_FILE: app_v3.py
     restart: unless-stopped
