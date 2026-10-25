@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  namespace: ai-cloud-allocator
+spec:
+  type: LoadBalancer           # on Docker Desktop this is exposed on localhost
+  selector:
+    app: dashboard
+  ports:
+    - port: 8501
+      targetPort: 8501
+  # Streamlit keeps each browser session in one pod, so pin a user to the same pod
+  sessionAffinity: ClientIP

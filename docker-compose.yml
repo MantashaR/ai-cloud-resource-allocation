@@ -1,0 +1,11 @@
+services:
+  dashboard:
+    build: .
+    image: ai-cloud-allocator:latest
+    container_name: ai-cloud-allocator
+    ports:
+      - "8501:8501"
+    environment:
+      # app_v2.py = easy dashboard, app.py = full technical dashboard
+      APP_FILE: app_v2.py
+    restart: unless-stopped

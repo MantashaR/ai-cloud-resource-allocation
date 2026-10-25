@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  namespace: ai-cloud-allocator
+  labels:
+    app: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: ai-cloud-allocator:latest
+          imagePullPolicy: IfNotPresent   # use the locally built image
+          ports:
+            - containerPort: 8501
+          env:
+            - name: APP_FILE
+              value: app_v2.py
+          resources:
+            requests:            # what the scheduler reserves for each pod
+              cpu: 250m
+              memory: 512Mi
+            limits:              # hard ceiling; model training needs ~1 GiB
+              cpu: "1"
+              memory: 1536Mi
+          readinessProbe:        # only send traffic once Streamlit is up
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:         # restart the pod if it stops responding
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 30
+            periodSeconds: 20

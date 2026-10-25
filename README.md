@@ -21,6 +21,33 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+## Run with Docker
+
+```bash
+docker compose up --build
+```
+Open http://localhost:8501. To run the full technical dashboard instead of the easy one, set
+`APP_FILE: app.py` in `docker-compose.yml`.
+
+## Deploy to Kubernetes
+
+The `k8s/` folder has the manifests:
+
+| File | What it does |
+|---|---|
+| `namespace.yaml` | Own namespace `ai-cloud-allocator` |
+| `deployment.yaml` | Runs the dashboard pod with CPU/memory requests and limits, readiness and liveness probes |
+| `service.yaml` | Exposes it on port 8501 (LoadBalancer, sticky sessions for Streamlit) |
+| `hpa.yaml` | Standard CPU-based HorizontalPodAutoscaler (1 to 5 pods), the reactive baseline the AI is compared with |
+
+On Docker Desktop with Kubernetes enabled:
+```bash
+docker build -t ai-cloud-allocator:latest .
+kubectl apply -f k8s/
+kubectl get pods -n ai-cloud-allocator
+```
+Then open http://localhost:8501. The HPA needs `metrics-server` installed in the cluster.
+
 ## Results (built-in e-commerce scenario, 7 unseen test days)
 
 | Autoscaler | Monthly cost | SLA breaches | Avg CPU utilization |
@@ -35,7 +62,10 @@ Anomaly detection found 26 of 27 injected anomalies across 9 scenario/seed runs,
 ## Project structure
 
 ```
-app.py               Streamlit dashboard (8 tabs)
+app_v2.py            Easy-to-read dashboard (plain language, guided tabs)
+app.py               Full technical dashboard (8 tabs)
+Dockerfile           Container image; docker-compose.yml runs it
+k8s/                 Kubernetes manifests (Deployment, Service, HPA)
 core/simulator.py    Workload generator, Kubernetes-style cluster simulator, latency model, baseline autoscalers
 core/ai_models.py    Forecaster, conformal calibration, predictive policy, Q-learning agent, HPA stabilizer
 core/anomaly.py      Robust-covariance anomaly detector + validation against injected anomalies
