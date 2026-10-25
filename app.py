@@ -1,5 +1,5 @@
 """
-CloudMind - AI-Driven Intelligent Cloud Resource Allocation & Predictive Autoscaling
+AI-Driven Intelligent Cloud Resource Allocation & Predictive Autoscaling
 Run:  streamlit run app.py
 """
 import math
@@ -14,7 +14,7 @@ import streamlit as st
 from core.simulator import generate_workload, SCENARIOS, STEPS_PER_DAY, STEP_MIN, REQ_PER_VCPU, max_util_for_latency
 from core.pipeline import run_experiment, what_if, HYBRID
 
-st.set_page_config(page_title="CloudMind - AI Cloud Resource Allocation", page_icon="☁️", layout="wide")
+st.set_page_config(page_title="AI Cloud Resource Allocation", page_icon="☁️", layout="wide")
 
 STATIC, REACTIVE, PREDICT = "Static (peak provisioning)", "Reactive (HPA threshold)", "AI Predictive (ML forecast)"
 ORDER = [STATIC, REACTIVE, PREDICT, HYBRID]
@@ -47,7 +47,7 @@ st.markdown("""
 
 st.markdown("""
 <div class="hero">
-<h1>☁️ CloudMind: AI-Driven Cloud Resource Allocation & Predictive Autoscaling</h1>
+<h1>☁️ AI-Driven Cloud Resource Allocation & Predictive Autoscaling</h1>
 <p>Forecasts CPU, memory and traffic with Machine Learning, scales Kubernetes pods <b>before</b> the spike,
 learns the cost-vs-SLA trade-off with Reinforcement Learning, detects anomalies and explains every decision.</p>
 </div>

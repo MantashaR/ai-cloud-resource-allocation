@@ -1,5 +1,5 @@
 @echo off
-title CloudMind - AI Cloud Resource Allocation (Simple)
+title AI Cloud Resource Allocation (Simple)
 cd /d "%~dp0"
 echo.
 echo  Installing requirements (first run only, needs internet)...

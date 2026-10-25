@@ -1,4 +1,4 @@
-# ☁️ CloudMind: AI-Driven Intelligent Cloud Resource Allocation and Predictive Autoscaling
+# ☁️ AI-Driven Intelligent Cloud Resource Allocation and Predictive Autoscaling
 
 A working prototype that allocates cloud resources (Kubernetes pods) using AI:
 
@@ -12,7 +12,7 @@ A working prototype that allocates cloud resources (Kubernetes pods) using AI:
 
 ## Run it
 
-**Windows:** double-click **`Run CloudMind.bat`**. The browser opens at http://localhost:8501.
+**Windows:** double-click **`Run Dashboard.bat`**. The browser opens at http://localhost:8501.
 The first run trains the AI (~25 s); after that the results are cached.
 
 Manual:

@@ -1,9 +1,9 @@
 @echo off
-title CloudMind - AI Cloud Resource Allocation
+title AI Cloud Resource Allocation
 cd /d "%~dp0"
 echo.
 echo  ==========================================================
-echo   CloudMind - AI-Driven Cloud Resource Allocation
+echo   AI-Driven Cloud Resource Allocation
 echo   Installing requirements (first run only, needs internet)
 echo  ==========================================================
 python -m pip install -q -r requirements.txt

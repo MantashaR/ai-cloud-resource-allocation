@@ -1,5 +1,5 @@
 """
-CloudMind (simple version) - AI Cloud Resource Allocation
+AI Cloud Resource Allocation (simple version)
 Run:  streamlit run app_v2.py
 """
 import time
@@ -12,7 +12,7 @@ import streamlit as st
 from core.simulator import generate_workload, SCENARIOS, STEPS_PER_DAY
 from core.pipeline import run_experiment, HYBRID
 
-st.set_page_config(page_title="CloudMind - AI Cloud Resource Allocation", page_icon="☁️", layout="wide")
+st.set_page_config(page_title="AI Cloud Resource Allocation", page_icon="☁️", layout="wide")
 
 STATIC, NORMAL, AI = "Static (peak provisioning)", "Reactive (HPA threshold)", HYBRID
 NAME = {STATIC: "Fixed servers", NORMAL: "Normal autoscaling", AI: "AI autoscaling"}
@@ -43,7 +43,7 @@ st.markdown("""
 
 st.markdown("""
 <div class="hero">
-<h1>☁️ CloudMind: AI Cloud Resource Allocation</h1>
+<h1>☁️ AI Cloud Resource Allocation</h1>
 <p>AI predicts website traffic and adds or removes cloud servers <b>before</b> the traffic arrives:
 lower cost, no slow website.</p>
 </div>
