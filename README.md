@@ -73,17 +73,31 @@ core/anomaly.py      Robust-covariance anomaly detector + validation against inj
 core/pipeline.py     End-to-end experiment, explainable decisions, what-if engine
 ```
 
-## Method
+## How we tested it (in simple words)
 
-* **Data split:** train forecasters on days 1-14 → calibrate the interval and train RL on days 15-21 →
-  test everything on days 22-28, which the models never saw.
-* **Cluster model:** pods take a configurable start-up delay (node + pod start) and are billed while starting.
-  Response time follows a queueing model, `RT = 60 ms / (1 - utilization)`.
-  An SLA breach is dropped work, response time above the limit, or out-of-memory.
-* **Baselines:** static peak provisioning, and a reactive threshold autoscaler (+2 pods above the max
-  utilization, −1 pod below 40%, 15-minute cooldown).
-* **Your own data:** upload a CSV with a `cpu` column (vCPU per 5 minutes, at least 8 days). `requests` and
-  `memory` columns are optional.
+**1. We split 4 weeks of data into 3 parts, so the test is fair.**
+
+| Days | What happens |
+|---|---|
+| Days 1–14 | The AI **learns** the traffic patterns (training) |
+| Days 15–21 | The AI **practises**: it sets its safety margin and the learning agent (RL) learns by trial and error |
+| Days 22–28 | The **final test**. The AI has never seen these days, so the results are honest |
+
+**2. The simulated servers behave like real ones.**
+* A new server (pod) takes a few minutes to start, and we pay for it even while it is starting.
+* The busier the servers are, the slower the website gets. When servers are almost 100% busy,
+  response time shoots up (formula: `response time = 60 ms / (1 − how busy the servers are)`).
+* A **"slow moment"** (SLA breach) is counted when the website drops work, takes longer than the
+  time limit to respond, or runs out of memory.
+
+**3. We compared our AI with two common methods.**
+* **Fixed servers:** always run enough servers for the busiest moment ever seen. Never slow, but very costly.
+* **Normal autoscaling:** add 2 servers when they get too busy, remove 1 when they are under 40% busy,
+  and wait 15 minutes between changes. This is how a basic Kubernetes autoscaler works.
+
+**4. You can test it on your own data** (full dashboard, `app.py`).
+Upload a CSV file with a `cpu` column: one row for every 5 minutes, at least 8 days of data.
+The `requests` (visitors) and `memory` columns are optional.
 
 ## Production mapping
 
