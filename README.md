@@ -77,9 +77,9 @@ core/pipeline.py     End-to-end experiment, explainable decisions, what-if engin
 
 * **Data split:** train forecasters on days 1-14 → calibrate the interval and train RL on days 15-21 →
   test everything on days 22-28, which the models never saw.
-* **Cluster model:** pods take a configurable start-up delay (node + pod start) and are billed while starting.
-  Response time follows a queueing model, `RT = 60 ms / (1 - utilization)`.
-  An SLA breach is dropped work, response time above the limit, or out-of-memory.
+* **Cluster model:** new servers (pods) take a few minutes to start and cost money while starting.
+  The busier the servers, the slower the website (`response time = 60 ms / (1 - how busy)`).
+  A "slow moment" (SLA breach) is when work is dropped, pages are too slow, or memory runs out.
 * **Baselines:** static peak provisioning, and a reactive threshold autoscaler (+2 pods above the max
   utilization, −1 pod below 40%, 15-minute cooldown).
 * **Your own data:** upload a CSV with a `cpu` column (vCPU per 5 minutes, at least 8 days). `requests` and
