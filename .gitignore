@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Windows launchers (kept locally, not in the repo)
+*.bat
