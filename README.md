@@ -12,9 +12,6 @@ A working prototype that allocates cloud resources (Kubernetes pods) using AI:
 
 ## Run it
 
-**Windows:** double-click **`Run Dashboard.bat`**. The browser opens at http://localhost:8501.
-The first run trains the AI (~25 s); after that the results are cached.
-
 Manual:
 ```bash
 pip install -r requirements.txt
