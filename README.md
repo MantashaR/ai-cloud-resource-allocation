@@ -12,11 +12,12 @@ A working prototype that allocates cloud resources (Kubernetes pods) using AI:
 
 ## Run it
 
-Manual:
 ```bash
 pip install -r requirements.txt
-streamlit run app.py
+streamlit run app_v3.py --server.port 8503
 ```
+Open http://localhost:8503. For the full technical dashboard (8 tabs) run `streamlit run app.py`
+instead; it opens at http://localhost:8501.
 
 ## Run with Docker
 
